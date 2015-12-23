@@ -5,6 +5,7 @@ import requests
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
+# 　从糗百获取全部代码，并匹配导出所需内容
 class recode():
     def scrapy_code(self,url,headers):
         html=requests.get(url,headers=headers).text
@@ -13,7 +14,7 @@ class recode():
         for each in code:
             code_we_need.append(each)
         return code_we_need
-
+# 　将所需内容保存在txt文本里
     def save_code(self,code_print):
         f=open('code.txt','a')
         for each in code_print:
