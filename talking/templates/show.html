@@ -1,0 +1,26 @@
+<html>
+	<head>
+    </head>
+    <body>
+    <div align="center">
+    <h1>会话</h1>
+        <ul>
+        {%for each in all%}
+        <li>{{ each[1] }}  {{ each[2] }}</li>
+        <li>{{ each[0] }}</li>
+        {%endfor%}
+        </ul>
+        <ul>
+        {%for each in result%}
+        <li>{{ each[1] }}  {{ each[2] }}</li>
+        <li>{{ each[0] }}</li>
+        {%endfor%}
+        </ul>
+        <form method ="post">
+            <input type="text"  required="required" name="info" placeholder="内容："/>
+            <input type='Submit' value="留言" />
+        </form>
+
+    </div>
+    </body>
+</html>
