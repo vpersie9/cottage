@@ -37,7 +37,7 @@ def login():
 @app.route('/logout')
 def logout():
     resp=make_response(redirect(url_for('index')))
-    resp.set_cookie('login','',expires=0)
+    resp.set_cookie('login','',expires=100)
     return resp
 
 if __name__=="__main__":
