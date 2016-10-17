@@ -1,0 +1,75 @@
+#-*-coding:utf-8-*-
+'''
+这一个脚本主要是用来装载算法程序的
+其中包括了排序和查找等基本算法
+当然也包括了哈希查找（时间复杂度为O(1)）等高级算法
+'''
+
+u'无序列表的顺序查找'
+
+def Unsorted_Sequence_Search(alist,item):
+	found=False
+	passnum=0
+	while passnum<len(alist) and not found:
+		if alist[passnum]==item:
+			found=True
+		else:
+			passnum += 1
+	return found
+
+
+u'有序列表的顺序查找'
+
+def Sorted_Sequence_Search(alist,item):
+	found=False
+	passnum=0
+	stop=False
+	while passnum<len(alist) and not found and not stop:
+		if alist[passnum]==item:
+			found=True
+		else:
+			if alist[passnum]>item:
+				stop=True
+			else:
+				passnum += 1
+	return found
+
+
+u'二分法查找'
+
+def Binary_Search(alist,item):
+	found=False
+	first=alist[0]
+	last=alist[len(alist)-1]
+	while first <= last and not found:
+		midpoint=(first+last)//2
+		if alist[midpoint]==item:
+			found=True
+		else:
+			if alist[midpoint]<item:
+				first=midpoint+1
+			else:
+				last=midpoint-1
+	return found
+
+u'二分法采用递归手段'
+
+def Recursion_Binary_Search(alist,item):
+	found=False
+	first=alist[0]
+	last=alist[len(alist)-1]
+	while first <= last and not found:
+		midpoint=(first+last)//2
+		if alist[midpoint]==item:
+			found=True
+		else:
+			if alist[midpoint]<item:
+				return Recursion_Binary_Search(alist[midpoint+1:],item)
+			else:
+				return Recursion_Binary_Search(alist[:midpoint-1],item) 
+
+if __name__=="__main__":
+	alist=range(9)
+	print Sorted_Sequence_Search(alist,6)
+	print Binary_Search(alist,6)	
+	print Recursion_Binary_Search(alist,6)

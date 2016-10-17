@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单提交君</title>
+    <script type="text/javascript" src="../static/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+
+	function ajaxForm(){
+
+		$(function(){
+
+			$.ajax({
+
+                method: 'POST',
+
+                contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
+
+                url: 'http://localhost:8080/chat',
+
+                dataType: 'json',
+
+				data:{
+
+					'name' : $('input[name="name"]').val(),
+
+					'password' : $('input[name="password"]').val()
+
+					},
+
+				error: function(xhr,err){
+
+					alert('请求失败，原因可能是：'+err+ '!');
+
+						},
+
+				success: function(data,textStatus){
+
+					if (data.warning){
+
+						alert(data.warning);
+
+							}
+
+					else if (data.login_success){
+
+						alert(data.login_success);
+
+							}
+
+					$('input[name="name"]').val('');
+
+					$('input[name="password"]').val('');
+
+						}
+
+				});
+
+			});
+
+            return false;
+		}
+</script>
+</head>
+<body>
+	<div class="render_form">
+		<h1>提交吧 表单君</h1>
+		<form method="post" name="form" action="" onsubmit="return ajaxForm()">
+		<input type="text" name="name" /><br>
+		<input type="password" name="password" /><br>
+		<input type="submit" value="提交" />
+		</form>
+	</div>
+</body>
+</html>

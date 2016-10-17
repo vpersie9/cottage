@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>xsrf_cookies</title>
+    <script type="text/javascript" src="../static/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        function getCookie(name){
+            var arg=document.cookie.match("\\b"+name+"=([^;]*)\\b");
+            return arg ? arg[1] : undefined;
+        }
+
+        $.postJSON=function(url,data,callback){
+            data._xsrf=getCookie("_xsrf");
+            $.ajax({
+                url:url,
+                data: $.param(data),
+                dataType:"json",
+                type:"POST",
+                success:callback
+            });
+        }
+    </script>
+</head>
+<body>
+    <form action="/purchase" method="POST">
+            {% raw xsrf_form_html() %}
+            <input type="text" name="title" required="required" />
+            <input type="text" name="quantity" required="required" />
+            <input type="submit" value="Check Out" required="required" />
+    </form>
+</body>
+</html>
